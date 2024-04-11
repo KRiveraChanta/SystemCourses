@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Avance de Curso</title>
+    <title>Usuario</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
 
   @include('menu');
 
-    <h1 class="text-center p-3" style="font-weight: bold;">Avance de Curso</h1>
+    <h1 class="text-center p-3" style="font-weight: bold;">Usuario</h1>
 
 
     <div style="padding: 0px 20%;" class="table-responsive">
@@ -51,7 +51,7 @@
               
               Swal.fire({
                     icon: 'warning',
-                    title: '¿Estás seguro?',
+                    title: '¿Estás seguro de eliminar este usuario?',
                     text: '¡Esta acción no se puede revertir!',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -76,7 +76,7 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Crear Nuevo Avance</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Crear Nuevo Usuario</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   {{-- Contenido del Modal Crear --}}
@@ -84,8 +84,32 @@
                         <form action=" {{route("crud.create")}} " method="post">
                           @csrf
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nombre del Avance</label>
-                            <input type="text" class="form-control" id="txtNombreAvance" aria-describedby="emailHelp" name="txtNombreAvance">
+                            <label for="exampleInputEmail1" class="form-label">Login</label>
+                            <input type="text" class="form-control" id="txtLogin" aria-describedby="emailHelp" name="txtLogin">
+                            
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Contraseña</label>
+                            <input type="text" class="form-control" id="txtContrasenia" aria-describedby="emailHelp" name="txtContrasenia">
+                            
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="txtNickname" aria-describedby="emailHelp" name="txtNickname">
+                            
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Correo</label>
+                            <input type="text" class="form-control" id="txtCorreo" aria-describedby="emailHelp" name="txtCorreo">
+                            
+                          </div>
+
+                          <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Rol</label>
+                            <input type="text" class="form-control" id="txtRol" aria-describedby="emailHelp" name="txtRol">
                             
                           </div>
 
@@ -111,16 +135,24 @@
             <thead class="table-dark">
               <tr>
                 <th scope="col">CÓDIGO</th>
-                <th scope="col">NOMBRE</th>
+                <th scope="col">LOGIN</th>
+                <th scope="col">CONTRASEÑA</th>
+                <th scope="col">NOMBRE COMPLETO</th>
+                <th scope="col">CORREO</th>
+                <th scope="col">ID ROL</th>
                 <th scope="col">ACCIÓN</th>
               </tr>
             </thead>
 
             <tbody>
-              @foreach ($avanceData as $item)
+              @foreach ($usuarioData as $item)
               <tr>
                 <th>{{$item->id}}</th>
-                <td>{{$item->avance}}</td>
+                <td>{{$item->login}}</td>
+                <td>{{$item->contrasenia}}</td>
+                <td>{{$item->nickname}}</td>
+                <td>{{$item->correo}}</td>
+                <td>{{$item->id_rol}}</td>
                 <td>
                   <div class="text-center">
                     <a href="" data-bs-toggle="modal" data-bs-target="#editarModal{{$item->id}}" class="btn btn-warning btn-sm"> <i class="fa-solid fa-pen-to-square"></i> </a>
@@ -142,14 +174,27 @@
                           </div>
                           {{-- Contenido del Modal Editar --}}
                               <div class="modal-body">
-                                <form action="{{route("crud.update")}}" method="POST">
+                                <form action="{{ route('crud.update', ['id' => $item->id]) }}" method="POST">
                                   @csrf
+                                  <input type="hidden" name="id" value="{{ $item->id }}">
                                   <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Código del Avance</label>
-                                    <input type="text" class="form-control" id="txtIdAvance" name="txtIdAvance" value="{{ $item->id }}" readonly>
+                                    <label for="exampleInputEmail1" class="form-label">Código del Usuario</label>
+                                    <input type="text" class="form-control" id="txtId" name="txtId" value="{{ $item->id }}" readonly>
 
-                                    <label for="exampleInputEmail1" class="form-label">Nombre del Avance</label>
-                                    <input type="text" class="form-control" id="txtNombreAvance" name="txtNombreAvance" value="{{ $item->avance }}">
+                                    <label for="exampleInputEmail1" class="form-label">Login</label>
+                                    <input type="text" class="form-control" id="txtLogin" name="txtLogin" value="{{ $item->login }}">
+
+                                    <label for="exampleInputEmail1" class="form-label">Contraseña</label>
+                                    <input type="text" class="form-control" id="txtContrasenia" name="txtContrasenia" value="{{ $item->contrasenia }}">
+
+                                    <label for="exampleInputEmail1" class="form-label">Nombre Completo</label>
+                                    <input type="text" class="form-control" id="txtNickname" name="txtNickname" value="{{ $item->nickname }}">
+
+                                    <label for="exampleInputEmail1" class="form-label">Correo</label>
+                                    <input type="text" class="form-control" id="txtCorreo" name="txtCorreo" value="{{ $item->correo }}">
+
+                                    <label for="exampleInputEmail1" class="form-label">Rol</label>
+                                    <input type="text" class="form-control" id="txtRol" name="txtRol" value="{{ $item->id_rol }}">
                                     
                                   </div>
 

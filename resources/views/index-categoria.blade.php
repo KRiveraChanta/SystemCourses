@@ -22,8 +22,12 @@
   </style>
 
 <body>
-    <h1 class="text-center p-3" style="font-weight: bold;">Categorías</h1>
-
+    @include('menu');
+    
+    <main>
+      <h1 class="text-center p-3" style="font-weight: bold;">Categorías</h1>
+    </main>
+   
 
     <div style="padding: 0px 20%;" class="table-responsive">
         <div style="padding: 20px 20px 20px 1px;">

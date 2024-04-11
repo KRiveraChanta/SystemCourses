@@ -7,7 +7,7 @@ use App\Http\Controllers\AvanceController;
 use App\Http\Controllers\PlataformaController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\RolController;
-
+use App\Http\Controllers\UsuarioController;
 
 /* Route::get('/posts', [PruebaController::class,'index'])->name('posts'); */
 
@@ -110,3 +110,19 @@ Route::post("/editar-rol",[RolController::class,"update"])->name("crud.update");
 
 //Eliminar 
 Route::get("/eliminar-rol-{id}",[RolController::class,"delete"])->name("crud.delete");
+
+
+
+//Usuarios
+
+// Listar
+Route::get("/index-usuario",[UsuarioController::class,"index"])->name("crud.index");
+
+//Nueva
+Route::post("/crear-usuario",[UsuarioController::class,"create"])->name("crud.create");
+
+//Editar
+Route::post("/editar-usuario/{id}",[UsuarioController::class,"update"])->name("crud.update");
+
+//Eliminar 
+Route::get("/eliminar-usuario-{id}",[UsuarioController::class,"delete"])->name("crud.delete");

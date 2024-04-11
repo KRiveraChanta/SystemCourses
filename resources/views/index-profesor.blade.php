@@ -22,6 +22,9 @@
   </style>
 
 <body>
+
+  @include('menu');
+
     <h1 class="text-center p-3" style="font-weight: bold;">Profesor</h1>
 
 
