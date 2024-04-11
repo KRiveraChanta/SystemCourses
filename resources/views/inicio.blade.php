@@ -56,13 +56,13 @@
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{ $url = asset('index-categoria') }}">Categoria</a></li>
-                <li><a class="dropdown-item" href="#">Etiquetas</a></li>
+                <li><a class="dropdown-item" href="{{ $url = asset('index-etiqueta') }}">Etiquetas</a></li>
                 {{-- <li><hr class="dropdown-divider"></li> --}}
-                <li><a class="dropdown-item" href="#">Avance</a></li>
-                <li><a class="dropdown-item" href="#">Plataforma</a></li>
+                <li><a class="dropdown-item" href="{{ $url = asset('index-avance') }}">Avance</a></li>
+                <li><a class="dropdown-item" href="{{ $url = asset('index-plataforma') }}">Plataforma</a></li>
+                <li><a class="dropdown-item" href="{{ $url = asset('index-profesor') }}">Profesores</a></li>
+                <li><a class="dropdown-item" href="{{ $url = asset('index-rol') }}">Roles</a></li>
                 <li><a class="dropdown-item" href="#">Cursos</a></li>
-                <li><a class="dropdown-item" href="#">Profesores</a></li>
-                <li><a class="dropdown-item" href="#">Roles</a></li>
                 <li><a class="dropdown-item" href="#">Usuarios</a></li>
               </ul>
             </li>
