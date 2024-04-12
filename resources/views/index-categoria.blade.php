@@ -65,9 +65,14 @@
                     }
                 })
               }
+              
             </script>
 
         </div>
+
+
+      
+
 
           <!-- Modal Crear Datos-->
           <div>
@@ -82,11 +87,12 @@
                   </div>
                   {{-- Contenido del Modal Crear --}}
                       <div class="modal-body">
-                        <form action=" {{route("crud.create")}} " method="post">
+                        <form action=" {{route("crud.store")}} " method="POST" enctype="multipart/form-data">
+                          
                           @csrf
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nombre de la categoría</label>
-                            <input type="text" class="form-control" id="txtNombreCategoria" aria-describedby="emailHelp" name="txtNombreCategoria">
+                            <label for="txtNombreCategoria" class="form-label">Nombre de la categoría</label>
+                            <input type="text" class="form-control" aria-describedby="emailHelp" name="txtNombreCategoria">
                             
                           </div>
 
@@ -124,52 +130,44 @@
                 <td>{{$item->nombre_categoria}}</td>
                 <td>
                   <div class="text-center">
-                    <a href="" data-bs-toggle="modal" data-bs-target="#editarModal{{$item->id}}" class="btn btn-warning btn-sm"> <i class="fa-solid fa-pen-to-square"></i> </a>
-                    <a href=" {{ route("crud.delete",$item->id) }} " onclick="confirmation(event)" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash"></i> </a>
+                    <a href="" data-bs-toggle="modal" data-bs-target="#editarCategoria{{$item->id}}" class="btn btn-warning btn-sm"> <i class="fa-solid fa-pen-to-square"></i> </a>
+                    <a href=" {{ route("crud.deletea",$item->id) }} " onclick="confirmation(event)" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash"></i> </a>
+                      
                   </div>
                     
                 </td>
 
-                  <!-- Modal Editar Datos-->
-                  <div>
-
+                
                     <!-- Modal Modificar Datos-->
-                    <div class="modal fade" id="editarModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        
+                    <div class="modal fade" id="editarCategoria{{$item->id}}" tabindex="-1" aria-labelledby="editarCategoriaLabel{{$item->id}}" aria-hidden="true">
                       <div class="modal-dialog">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Datos</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          {{-- Contenido del Modal Editar --}}
-                              <div class="modal-body">
-                                <form action="{{route("crud.update")}}" method="POST">
-                                  @csrf
-                                  <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Código de la categoría</label>
-                                    <input type="text" class="form-control" id="txtIdCategoria" name="txtIdCategoria" value="{{ $item->id}}" readonly>
-
-                                    <label for="exampleInputEmail1" class="form-label">Nombre de la categoría</label>
-                                    <input type="text" class="form-control" id="txtNombreCategoria" name="txtNombreCategoria" value="{{ $item->nombre_categoria }}">
-                                    
-                                  </div>
-
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                    <button type="submit" class="btn btn-primary">Actualizar datos</button>
-                                  </div>
-
-                                </form>
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="editarCategoriaLabel{{$item->id}}">Editar Categoría</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
-
-
-                          
-                        </div>
+                              <form action="{{ route('crud.updatea', ['id' => $item->id]) }}" method="POST">
+                                  @csrf
+                                  @method('PUT')
+                                  <div class="modal-body">
+                                      <!-- Campos de edición -->
+                                      <div class="mb-3">
+                                          <label for="nombre_categoria" class="form-label">Nombre de la Categoría</label>
+                                          <input type="text" class="form-control" id="nombre_categoria" name="nombre_categoria" value="{{ $item->nombre_categoria }}">
+                                      </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                      <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                  </div>
+                              </form>
+                          </div>
                       </div>
                     </div>
 
                     
-                  </div>
+                  
 
                   
 

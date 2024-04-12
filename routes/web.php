@@ -24,13 +24,16 @@ Route::get('/', function () {
 Route::get("/index-categoria",[CategoriaController::class,"index"])->name("crud.index");
 
 //Nueva 
-Route::post("/crear-categoria",[CategoriaController::class,"create"])->name("crud.create");
+Route::post("/crear-categoria",[CategoriaController::class,"store"])->name("crud.store");
 
 //Editar 
-Route::post("/editar-categoria",[CategoriaController::class,"update"])->name("crud.update");
+
+Route::get('/editar-categori/{id}', [CategoriaController::class, 'edit'])->name('crud.edit');
+Route::put('/actualizar-categoria/{id}', [CategoriaController::class, 'updatea'])->name('crud.updatea');
+
 
 //Eliminar 
-Route::get("/eliminar-categoria-{id}",[CategoriaController::class,"delete"])->name("crud.delete");
+Route::get("/eliminar-categoria/{id}",[CategoriaController::class,"deletea"])->name("crud.deletea");
 
 
 //Etiqueta

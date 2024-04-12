@@ -12,9 +12,6 @@ class UsuarioController extends Controller
         $usuarioData=Usuario::all();
         return view("index-usuario")->with("usuarioData",$usuarioData);
 
-
-       /*  $usuarioData=DB::select("select * from usuario");
-        return view("index-usuario")->with("usuarioData",$usuarioData); */
     } 
 
     public function create(Request $request){
@@ -37,23 +34,6 @@ class UsuarioController extends Controller
             return back()->with("incorrecto","Error al registrar");
         } 
 
-        /* try {
-            $sql=DB::insert(" insert into usuario(login, contrasenia, nickname, correo, id_rol) values (?) (?) (?) (?) (?)", [
-                $request->txtLogin,
-                $request->txtContrasenia,
-                $request->txtNickname,
-                $request->txtCorreo,
-                $request->txtRol,
-            ]);
-            
-        } catch (\Throwable $th) {
-            $sql=0;
-        }
-        if($sql == true){
-            return back()->with("correcto","Usuario registrado correctamente");
-        }else{
-            return back()->with("incorrecto","Error al registrar");
-        } */
 
     }
 
@@ -77,27 +57,7 @@ class UsuarioController extends Controller
             return back()->with("incorrecto", "Error al editar usuario");
         }
 
-        /* try {
-            $sql=DB::insert(" update usuario set login =?,contrasenia =?,nickname =?, correo =?, id_rol =? where id=?", [
-                $request->txtLogin,
-                $request->txtContrasenia,
-                $request->txtNickname,
-                $request->txtCorreo,
-                $request->txtRol,
-                $request->txtId,
-            ]);
-            if ($sql==0){
-                $sql=1;
-            }
-            
-        } catch (\Throwable $th) {
-            $sql=0;
-        }
-        if($sql == true){
-            return back()->with("correcto","Usuario editado correctamente");
-        }else{
-            return back()->with("incorrecto","Error al editar usuario");
-        } */
+        
 
     }
 
