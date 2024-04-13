@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+
+use App\Models\Rol;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -10,7 +12,8 @@ class UsuarioController extends Controller
 {
     public function index(){
         $usuarioData=Usuario::all();
-        return view("index-usuario")->with("usuarioData",$usuarioData);
+        $rolData=Rol::all();
+        return view("index-usuario")->with(['usuarioData' => $usuarioData, 'rolData' => $rolData]);
 
     } 
 
@@ -22,7 +25,7 @@ class UsuarioController extends Controller
             $sql->contrasenia=$request->input('txtContrasenia');
             $sql->nickname=$request->input('txtNickname');
             $sql->correo=$request->input('txtCorreo');
-            $sql->id_rol=$request->input('txtRol');
+            $sql->id_rol=$request->input('idRol');
             $sql->save();
             
         } catch (\Throwable $th) {
@@ -45,7 +48,8 @@ class UsuarioController extends Controller
             $usuario->contrasenia = $request->input('txtContrasenia');
             $usuario->nickname = $request->input('txtNickname');
             $usuario->correo = $request->input('txtCorreo');
-            $usuario->id_rol = $request->input('txtRol');
+            $usuario->id_rol = $request->input('idRol');
+            
             $usuario->update();
             
             if ($usuario) {

@@ -28,7 +28,7 @@
     <h1 class="text-center p-3" style="font-weight: bold;">Usuario</h1>
 
 
-    <div style="padding: 0px 20%;" class="table-responsive">
+    <div style="padding: 0px 15%;" class="table-responsive">
         <div style="padding: 20px 20px 20px 1px;">
           <button data-bs-toggle="modal" data-bs-target="#crearModal" class="btn btn-primary">Nuevo</button>
         </div>
@@ -109,7 +109,11 @@
 
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Rol</label>
-                            <input type="text" class="form-control" id="txtRol" aria-describedby="emailHelp" name="txtRol">
+                            <select name="idRol" id="" class="form-control">
+                              @foreach($rolData as $rol)
+                              <option value="{{ $rol->id }}">{{ $rol->nombre_rol }}</option>
+                              @endforeach
+                            </select>
                             
                           </div>
 
@@ -139,7 +143,7 @@
                 <th scope="col">CONTRASEÑA</th>
                 <th scope="col">NOMBRE COMPLETO</th>
                 <th scope="col">CORREO</th>
-                <th scope="col">ID ROL</th>
+                <th scope="col">ROL</th>
                 <th scope="col">ACCIÓN</th>
               </tr>
             </thead>
@@ -152,7 +156,7 @@
                 <td>{{$item->contrasenia}}</td>
                 <td>{{$item->nickname}}</td>
                 <td>{{$item->correo}}</td>
-                <td>{{$item->id_rol}}</td>
+                <td>{{$item->selectRoles->nombre_rol}}</td>
                 <td>
                   <div class="text-center">
                     <a href="" data-bs-toggle="modal" data-bs-target="#editarModal{{$item->id}}" class="btn btn-warning btn-sm"> <i class="fa-solid fa-pen-to-square"></i> </a>
@@ -176,6 +180,7 @@
                               <div class="modal-body">
                                 <form action="{{ route('crud.update', ['id' => $item->id]) }}" method="POST">
                                   @csrf
+                                  
                                   <input type="hidden" name="id" value="{{ $item->id }}">
                                   <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Código del Usuario</label>
@@ -194,7 +199,15 @@
                                     <input type="text" class="form-control" id="txtCorreo" name="txtCorreo" value="{{ $item->correo }}">
 
                                     <label for="exampleInputEmail1" class="form-label">Rol</label>
-                                    <input type="text" class="form-control" id="txtRol" name="txtRol" value="{{ $item->id_rol }}">
+                                    <select name="idRol" id="" class="form-control">
+                                      @foreach($rolData as $rol)
+                                        @if($rol->id==$item->id_rol)
+                                          <option value="{{ $rol->id }}" selected>{{ $rol->nombre_rol }}</option>
+                                        @else
+                                        <option value="{{ $rol->id }}" >{{ $rol->nombre_rol }}</option>
+                                        @endif
+                                      @endforeach
+                                    </select>
                                     
                                   </div>
 

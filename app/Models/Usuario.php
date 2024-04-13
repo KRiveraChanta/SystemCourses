@@ -13,4 +13,11 @@ class Usuario extends Model
     protected $primaryKey='id';
     protected $fillable=['login','contrasenia','nickname','correo','id_rol'];
     public $timestamps=false;
+
+    public function selectRoles(){
+        return $this->hasOne(Rol::class,'id','id_rol');
+
+    }
+
+
 }
