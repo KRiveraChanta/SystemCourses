@@ -21,51 +21,46 @@ Route::get('/', function () {
 //Categoria
 
 // listar 
-Route::get("/index-categoria",[CategoriaController::class,"index"])->name("crud.index");
-
+Route::get("/index-categoria",[CategoriaController::class,"index"])->name("categoriaCrud.index");
 //Nueva 
-Route::post("/crear-categoria",[CategoriaController::class,"store"])->name("crud.store");
-
+Route::post("/crear-categoria",[CategoriaController::class,"store"])->name("categoriaCrud.store");
 //Editar 
-
-Route::get('/editar-categori/{id}', [CategoriaController::class, 'edit'])->name('crud.edit');
-Route::put('/actualizar-categoria/{id}', [CategoriaController::class, 'updatea'])->name('crud.updatea');
-
-
+Route::get('/editar-categoria/{id}', [CategoriaController::class, 'edit'])->name('categoriaCrud.edit');
+Route::put('/actualizar-categoria/{id}', [CategoriaController::class, 'updatea'])->name('categoriaCrud.updatea');
 //Eliminar 
-Route::get("/eliminar-categoria/{id}",[CategoriaController::class,"deletea"])->name("crud.deletea");
+Route::get("/eliminar-categoria/{id}",[CategoriaController::class,"deletea"])->name("categoriaCrud.deletea");
 
 
 //Etiqueta
 
 // Listar
-Route::get("/index-etiqueta",[EtiquetaController::class,"index"])->name("crud.index");
+Route::get("/index-etiqueta",[EtiquetaController::class,"index"])->name("etiquetaCrud.index");
 
 //Nueva
-Route::post("/crear-etiqueta",[EtiquetaController::class,"create"])->name("crud.create");
+Route::post("/crear-etiqueta",[EtiquetaController::class,"store"])->name("etiquetaCrud.store");
 
 //Editar
-Route::post("/editar-etiqueta",[EtiquetaController::class,"update"])->name("crud.update");
+Route::get("/editar-etiqueta/{id}",[EtiquetaController::class,"edit"])->name("etiquetaCrud.edit");
+Route::put("/actualizar-etiqueta/{id}",[EtiquetaController::class,"updatea"])->name("etiquetaCrud.updatea");
 
 //Eliminar 
-Route::get("/eliminar-etiqueta-{id}",[EtiquetaController::class,"delete"])->name("crud.delete");
-
-
+Route::get("/eliminar-etiqueta/{id}",[EtiquetaController::class,"deletea"])->name("etiquetaCrud.deletea");
 
 
 //Avance
 
 // Listar
-Route::get("/index-avance",[AvanceController::class,"index"])->name("crud.index");
+Route::get("/index-avance",[AvanceController::class,"index"])->name("avanceCrud.index");
 
 //Nueva
-Route::post("/crear-avance",[AvanceController::class,"create"])->name("crud.create");
+Route::post("/crear-avance",[AvanceController::class,"store"])->name("avanceCrud.store");
 
 //Editar
-Route::post("/editar-avance",[AvanceController::class,"update"])->name("crud.update");
+Route::get("/editar-avance/{id}",[AvanceController::class,"edit"])->name("avanceCrud.edit");
+Route::put("/actualizar-avance/{id}",[AvanceController::class,"updatea"])->name("avanceCrud.updatea");
 
 //Eliminar 
-Route::get("/eliminar-avance-{id}",[AvanceController::class,"delete"])->name("crud.delete");
+Route::get("/eliminar-avance/{id}",[AvanceController::class,"deletea"])->name("avanceCrud.deletea");
 
 
 

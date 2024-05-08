@@ -17,8 +17,8 @@
       font-family: "Montserrat", sans-serif;
       font-optical-sizing: auto;
       font-style: normal;
-
     }
+
   </style>
 
 <body>
@@ -70,10 +70,6 @@
 
         </div>
 
-
-      
-
-
           <!-- Modal Crear Datos-->
           <div>
 
@@ -87,8 +83,7 @@
                   </div>
                   {{-- Contenido del Modal Crear --}}
                       <div class="modal-body">
-                        <form action=" {{route("crud.store")}} " method="POST" enctype="multipart/form-data">
-                          
+                        <form action=" {{route("categoriaCrud.store")}} " method="POST" enctype="multipart/form-data">
                           @csrf
                           <div class="mb-3">
                             <label for="txtNombreCategoria" class="form-label">Nombre de la categoría</label>
@@ -131,7 +126,7 @@
                 <td>
                   <div class="text-center">
                     <a href="" data-bs-toggle="modal" data-bs-target="#editarCategoria{{$item->id}}" class="btn btn-warning btn-sm"> <i class="fa-solid fa-pen-to-square"></i> </a>
-                    <a href=" {{ route("crud.deletea",$item->id) }} " onclick="confirmation(event)" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash"></i> </a>
+                    <a href=" {{ route("categoriaCrud.deletea",$item->id) }} " onclick="confirmation(event)" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash"></i> </a>
                       
                   </div>
                     
@@ -147,7 +142,7 @@
                                   <h5 class="modal-title" id="editarCategoriaLabel{{$item->id}}">Editar Categoría</h5>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
-                              <form action="{{ route('crud.updatea', ['id' => $item->id]) }}" method="POST">
+                              <form action="{{ route('categoriaCrud.updatea', ['id' => $item->id]) }}" method="POST">
                                   @csrf
                                   @method('PUT')
                                   <div class="modal-body">

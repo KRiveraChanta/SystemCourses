@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Categoria;
 
 use Illuminate\Support\Facades\Validator;
-
+ 
 
 class CategoriaController extends Controller
 {
@@ -32,11 +32,10 @@ class CategoriaController extends Controller
         
     }
 
-    
     public function edit($id)
     {
         $categoria = Categoria::findOrFail($id);
-        return view('crud.edit', compact('categoria'));
+        return view('categoriaCrud.edit', compact('categoria'));
     }
 
     public function updatea(Request $request, $id)
@@ -54,7 +53,6 @@ class CategoriaController extends Controller
             return back()->with("incorrecto","Categoría no se editó");
         }
 
-      
     }
 
     public function deletea($id){

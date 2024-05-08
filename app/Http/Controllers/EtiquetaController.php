@@ -2,60 +2,62 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
-
 use Illuminate\Http\Request;
+use App\Models\Etiqueta;
 
 class EtiquetaController extends Controller
 {
     //Index
 
     public function index(){
-        $etiquetaData=DB::select("select * from etiqueta");
+        $etiquetaData=Etiqueta::all();
         return view("index-etiqueta")->with("etiquetaData",$etiquetaData);
     }
 
-    public function create(Request $request){
+    public function store(Request $request){
         try {
-            $sql=DB::insert(" insert into etiqueta(nombre_etiqueta) values (?)",[
-                $request->txtNombreEtiqueta,
-            ]);
+            $sql=new Etiqueta;
+            $sql->nombre_etiqueta = $request->input('txtNombreEtiqueta');
+            $sql->save();
 
-        } catch (\Throwable $th){
+        } catch (\Throwable $th) {
             $sql=0;
         }
-        if($sql == true){
+        if($sql == true){ 
             return back()->with("correcto","Etiqueta registrada correctamente");
         }else{
             return back()->with("incorrecto","Error al registrar");
         }
-
+        
     }
 
-    public function update(Request $request){
+    public function edit($id)
+    {
+        $etiqueta = Etiqueta::findOrFail($id);
+        return view('etiquetaCrud.edit', compact('etiqueta'));
+    }
+
+    public function updatea(Request $request, $id)
+    {
         try{
-            $sql=DB::insert(" update etiqueta set nombre_etiqueta =? where id=?",[
-                $request->txtNombreEtiqueta,
-                $request->txtIdEtiqueta,
-            ]);
-            if ($sql==0){
-                $sql=1;
-            }
-
-        }catch(\Throwable $th){
-            $sql=0;
+            $etiqueta = Etiqueta::findOrFail($id);
+            $etiqueta->nombre_etiqueta = $request->nombre_etiqueta;
+            $etiqueta->save();
+        }catch (\Throwable $th){
+            $etiqueta = 0;
         }
-
-        if($sql == true){
-            return back()->with("correcto","Etiqueta editada correctamente");
+        if ($etiqueta == true){
+            return back()->with("correcto","Etiqueta editada Correctamenta");
         }else{
-            return back()->with("incorrecto","Error al editar etiqueta");
+            return back()->with("incorrecto","Etiqueta no se editó");
         }
 
     }
 
-    public function delete($id){
+    public function deletea($id){
         try{
-            $sql = DB::delete("delete from etiqueta where id=$id");
+            $sql = Etiqueta::findOrFail($id);
+            $sql->delete();
         }catch (\Throwable $th){
             $sql = 0;
         }

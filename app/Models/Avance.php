@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Avance extends Model
 {
-    use HasFactory;
+    use HasFactory; 
+    protected $table='avance';
+    protected $primaryKey='id';
+    protected $fillable=['avance'];
+    protected $guarded=[];
+    public $timestamps=false;
 }

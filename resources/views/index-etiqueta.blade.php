@@ -17,15 +17,17 @@
       font-family: "Montserrat", sans-serif;
       font-optical-sizing: auto;
       font-style: normal;
-
     }
+
   </style>
 
 <body>
 
   @include('menu');
 
-    <h1 class="text-center p-3" style="font-weight: bold;">Etiquetas</h1>
+    <main>
+      <h1 class="text-center p-3" style="font-weight: bold;">Etiquetas</h1>
+    </main>
 
 
     <div style="padding: 0px 20%;" class="table-responsive">
@@ -81,10 +83,10 @@
                   </div>
                   {{-- Contenido del Modal Crear --}}
                       <div class="modal-body">
-                        <form action=" {{route("crud.create")}} " method="post">
+                        <form action=" {{route('etiquetaCrud.store')}}" method="POST" enctype="multipart/form-data">
                           @csrf
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nombre de la etiqueta</label>
+                            <label for="txtNombreEtiqueta" class="form-label">Nombre de la etiqueta</label>
                             <input type="text" class="form-control" id="txtNombreEtiqueta" aria-describedby="emailHelp" name="txtNombreEtiqueta">
                             
                           </div>
@@ -123,8 +125,8 @@
                 <td>{{$item->nombre_etiqueta}}</td>
                 <td>
                   <div class="text-center">
-                    <a href="" data-bs-toggle="modal" data-bs-target="#editarModal{{$item->id}}" class="btn btn-warning btn-sm"> <i class="fa-solid fa-pen-to-square"></i> </a>
-                    <a href=" {{ route("crud.delete",$item->id) }} " onclick="confirmation(event)" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash"></i> </a>
+                    <a href="" data-bs-toggle="modal" data-bs-target="#editar{{$item->id}}" class="btn btn-warning btn-sm"> <i class="fa-solid fa-pen-to-square"></i> </a>
+                    <a href=" {{ route("etiquetaCrud.deletea",$item->id) }} " onclick="confirmation(event)" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash"></i> </a>
                   </div>
                     
                 </td>
@@ -133,7 +135,7 @@
                   <div>
 
                     <!-- Modal Modificar Datos-->
-                    <div class="modal fade" id="editarModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="editar{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                       <div class="modal-dialog">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -142,14 +144,13 @@
                           </div>
                           {{-- Contenido del Modal Editar --}}
                               <div class="modal-body">
-                                <form action="{{route("crud.update")}}" method="POST">
+                                <form action="{{ route('etiquetaCrud.updatea', ['id' => $item->id]) }}" method="POST">
                                   @csrf
+                                  @method('PUT')
                                   <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Código de la etiqueta</label>
-                                    <input type="text" class="form-control" id="txtIdEtiqueta" name="txtIdEtiqueta" value="{{ $item->id }}" readonly>
-
+                                    
                                     <label for="exampleInputEmail1" class="form-label">Nombre de la etiqueta</label>
-                                    <input type="text" class="form-control" id="txtNombreEtiqueta" name="txtNombreEtiqueta" value="{{ $item->nombre_etiqueta }}">
+                                    <input type="text" class="form-control" id="nombre_etiqueta" name="nombre_etiqueta" value="{{ $item->nombre_etiqueta }}">
                                     
                                   </div>
 
@@ -160,17 +161,12 @@
 
                                 </form>
                               </div>
-
-
                           
                         </div>
                       </div>
                     </div>
-
                     
                   </div>
-
-                  
 
               </tr> 
               @endforeach

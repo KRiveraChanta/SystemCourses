@@ -9,7 +9,11 @@ class Etiqueta extends Model
 {
     use HasFactory;
 
-    protected $table='categoria';
+    protected $table='etiqueta';
+    protected $primaryKey='id';
+    protected $fillable=['nombre_etiqueta'];
+    protected $guarded=[];
+    public $timestamps=false;
 
 
 }
