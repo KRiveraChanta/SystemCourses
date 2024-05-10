@@ -1,21 +1,21 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Profesor;
 
 class ProfesorController extends Controller
 {
     public function index(){
-        $profesorData=DB::select("select * from profesor");
+        $profesorData = Profesor::all();
         return view("index-profesor")->with("profesorData",$profesorData);
     }
 
-    public function create(Request $request){
+    public function store(Request $request){
         try {
-            $sql=DB::insert(" insert into profesor(nombre_profesor) values (?)", [
-                $request->txtNombreProfesor,
-            ]);
+            $sql = new Profesor();
+            $sql -> nombre_profesor = $request -> input('txtNombreProfesor');
+            $sql -> save();
             
         } catch (\Throwable $th) {
             $sql=0;
@@ -28,20 +28,22 @@ class ProfesorController extends Controller
 
     }
 
-    public function update(Request $request){
+    public function edit($id)
+    {
+        $profesor = Profesor::findOrFail($id);
+        return view('profesorCrud.edit', compact('profesor'));
+    }
+
+    public function updatea(Request $request, $id){
         try {
-            $sql=DB::insert(" update profesor set nombre_profesor =? where id=?", [
-                $request->txtNombreProfesor,
-                $request->txtId,
-            ]);
-            if ($sql==0){
-                $sql=1;
-            }
-            
+            $profesor = Profesor::findOrFail($id);
+            $profesor -> nombre_profesor = $request -> nombre_profesor;
+            $profesor -> save();
+
         } catch (\Throwable $th) {
-            $sql=0;
+            $profesor = 0;
         }
-        if($sql == true){
+        if($profesor == true){
             return back()->with("correcto","Profesor editado correctamente");
         }else{
             return back()->with("incorrecto","Error al editar profesor");
@@ -49,13 +51,14 @@ class ProfesorController extends Controller
 
     }
 
-    public function delete($id){
+    public function deletea($id){
         try{
-            $sql = DB::delete("delete from profesor where id=$id");
+            $profesor = Profesor::findOrFail($id);
+            $profesor -> delete();
         }catch (\Throwable $th){
-            $sql = 0;
+            $profesor = 0;
         }
-        if ($sql == true){
+        if ($profesor == true){
             return back()->with("correcto","Profesor eliminado");
         }else{
             return back()->with("incorrecto","Profesor no se eliminó");

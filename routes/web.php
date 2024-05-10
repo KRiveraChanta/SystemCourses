@@ -67,31 +67,33 @@ Route::get("/eliminar-avance/{id}",[AvanceController::class,"deletea"])->name("a
 //Plataforma
 
 // Listar
-Route::get("/index-plataforma",[PlataformaController::class,"index"])->name("crud.index");
+Route::get("/index-plataforma",[PlataformaController::class,"index"])->name("plataformaCrud.index");
 
 //Nueva
-Route::post("/crear-plataforma",[PlataformaController::class,"create"])->name("crud.create");
+Route::post("/crear-plataforma",[PlataformaController::class,"store"])->name("plataformaCrud.store");
 
 //Editar
-Route::post("/editar-plataforma",[PlataformaController::class,"update"])->name("crud.update");
+Route::get("/editar-plataforma/{id}",[PlataformaController::class,"edit"])->name("plataformaCrud.edit");
+Route::put("/actualizar-plataforma/{id}",[PlataformaController::class,"updatea"])->name("plataformaCrud.updatea");
 
 //Eliminar 
-Route::get("/eliminar-plataforma-{id}",[PlataformaController::class,"delete"])->name("crud.delete");
+Route::get("/eliminar-plataforma/{id}",[PlataformaController::class,"deletea"])->name("plataformaCrud.delete");
 
 
 //Profesor
 
 // Listar
-Route::get("/index-profesor",[ProfesorController::class,"index"])->name("crud.index");
+Route::get("/index-profesor",[ProfesorController::class,"index"])->name("profesorCrud.index");
 
 //Nueva
-Route::post("/crear-profesor",[ProfesorController::class,"create"])->name("crud.create");
+Route::post("/crear-profesor",[ProfesorController::class,"store"])->name("profesorCrud.store");
 
 //Editar
-Route::post("/editar-profesor",[ProfesorController::class,"update"])->name("crud.update");
+Route::get("/editar-profesor/{id}",[ProfesorController::class,"edit"])->name("profesorCrud.edit");
+Route::put("/actualizar-profesor/{id}",[ProfesorController::class,"updatea"])->name("profesorCrud.updatea");
 
 //Eliminar 
-Route::get("/eliminar-profesor-{id}",[ProfesorController::class,"delete"])->name("crud.delete");
+Route::get("/eliminar-profesor/{id}",[ProfesorController::class,"deletea"])->name("profesorCrud.deletea");
 
 
 

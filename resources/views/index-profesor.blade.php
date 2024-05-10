@@ -25,8 +25,9 @@
 
   @include('menu');
 
+  <main>
     <h1 class="text-center p-3" style="font-weight: bold;">Profesor</h1>
-
+  </main>
 
     <div style="padding: 0px 20%;" class="table-responsive">
         <div style="padding: 20px 20px 20px 1px;">
@@ -81,10 +82,10 @@
                   </div>
                   {{-- Contenido del Modal Crear --}}
                       <div class="modal-body">
-                        <form action=" {{route("crud.create")}} " method="post">
+                        <form action=" {{route("profesorCrud.store")}} " method="post">
                           @csrf
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Nombre de Profesor</label>
+                            <label for="txtNombreProfesor" class="form-label">Nombre de Profesor</label>
                             <input type="text" class="form-control" id="txtNombreProfesor" aria-describedby="emailHelp" name="txtNombreProfesor">
                             
                           </div>
@@ -124,7 +125,7 @@
                 <td>
                   <div class="text-center">
                     <a href="" data-bs-toggle="modal" data-bs-target="#editarModal{{$item->id}}" class="btn btn-warning btn-sm"> <i class="fa-solid fa-pen-to-square"></i> </a>
-                    <a href=" {{ route("crud.delete",$item->id) }} " onclick="confirmation(event)" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash"></i> </a>
+                    <a href=" {{ route("profesorCrud.deletea",$item->id) }} " onclick="confirmation(event)" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash"></i> </a>
                   </div>
                     
                 </td>
@@ -142,14 +143,13 @@
                           </div>
                           {{-- Contenido del Modal Editar --}}
                               <div class="modal-body">
-                                <form action="{{route("crud.update")}}" method="POST">
+                                <form action="{{route('profesorCrud.updatea', ['id' => $item->id])}}" method="POST">
                                   @csrf
+                                  @method('PUT')
                                   <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Código del Profesor</label>
-                                    <input type="text" class="form-control" id="txtId" name="txtId" value="{{ $item->id }}" readonly>
 
                                     <label for="exampleInputEmail1" class="form-label">Nombre del Profesor</label>
-                                    <input type="text" class="form-control" id="txtNombreProfesor" name="txtNombreProfesor" value="{{ $item->nombre_profesor }}">
+                                    <input type="nombre_profesor" class="form-control" id="nombre_profesor" name="nombre_profesor" value="{{ $item->nombre_profesor }}">
                                     
                                   </div>
 

@@ -51,7 +51,6 @@ class EtiquetaController extends Controller
         }else{
             return back()->with("incorrecto","Etiqueta no se editó");
         }
-
     }
 
     public function deletea($id){
@@ -67,6 +66,4 @@ class EtiquetaController extends Controller
             return back()->with("incorrecto","Etiqueta no se eliminó");
         }
     }
-
-
 }
