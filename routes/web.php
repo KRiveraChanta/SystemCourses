@@ -8,6 +8,7 @@ use App\Http\Controllers\PlataformaController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\CursoController;
 
 /* Route::get('/posts', [PruebaController::class,'index'])->name('posts'); */
 
@@ -100,29 +101,51 @@ Route::get("/eliminar-profesor/{id}",[ProfesorController::class,"deletea"])->nam
 //Roles
 
 // Listar
-Route::get("/index-rol",[RolController::class,"index"])->name("crud.index");
+Route::get("/index-rol",[RolController::class,"index"])->name("rolCrud.index");
 
 //Nueva
-Route::post("/crear-rol",[RolController::class,"create"])->name("crud.create");
+Route::post("/crear-rol",[RolController::class,"store"])->name("rolCrud.store");
 
 //Editar
-Route::post("/editar-rol",[RolController::class,"update"])->name("crud.update");
+Route::get("/editar-rol/{id}",[RolController::class,"edit"])->name("rolCrud.edit");
+Route::put("/actualizar-rol/{id}",[RolController::class,"updatea"])->name("rolCrud.updatea");
 
 //Eliminar 
-Route::get("/eliminar-rol-{id}",[RolController::class,"delete"])->name("crud.delete");
+Route::get("/eliminar-rol/{id}",[RolController::class,"deletea"])->name("rolCrud.deletea");
 
 
 
 //Usuarios
 
 // Listar
-Route::get("/index-usuario",[UsuarioController::class,"index"])->name("crud.index");
+Route::get("/index-usuario",[UsuarioController::class,"index"])->name("usuarioCrud.index");
 
 //Nueva
-Route::post("/crear-usuario",[UsuarioController::class,"create"])->name("crud.create");
+Route::post("/crear-usuario",[UsuarioController::class,"create"])->name("usuarioCrud.create");
 
 //Editar
-Route::post("/editar-usuario/{id}",[UsuarioController::class,"update"])->name("crud.update");
+Route::post("/editar-usuario/{id}",[UsuarioController::class,"update"])->name("usuarioCrud.update");
 
 //Eliminar 
-Route::get("/eliminar-usuario-{id}",[UsuarioController::class,"delete"])->name("crud.delete");
+Route::get("/eliminar-usuario/{id}",[UsuarioController::class,"delete"])->name("usuarioCrud.delete");
+
+
+//Curso
+
+// Listar
+Route::get("/index-curso",[CursoController::class,"index"])->name("cursoCrud.index");
+
+//Nueva
+Route::post("/crear-curso",[CursoController::class,"store"])->name("cursoCrud.store");
+
+//Editar
+Route::post("/editar-curso/{id}",[CursoController::class,"update"])->name("cursoCrud.update");
+
+//Eliminar 
+Route::get("/eliminar-curso/{id}",[CursoController::class,"delete"])->name("cursoCrud.delete");
+
+
+// vista usuario
+
+// Listar
+Route::get("/vista-cursos",[CursoController::class,"vistaCursos"])->name("cursoCrud.vistaCursos");

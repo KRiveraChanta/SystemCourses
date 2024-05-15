@@ -12,6 +12,7 @@ class Rol extends Model
     protected $table='roles';
     protected $primaryKey='id';
     protected $fillable=['nombre_rol'];
+    protected $guarded = [];
     public $timestamps=false;
 
 }

@@ -16,8 +16,6 @@ class Usuario extends Model
 
     public function selectRoles(){
         return $this->hasOne(Rol::class,'id','id_rol');
-
     }
-
 
 }

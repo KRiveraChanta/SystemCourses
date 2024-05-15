@@ -81,7 +81,7 @@
                   </div>
                   {{-- Contenido del Modal Crear --}}
                       <div class="modal-body">
-                        <form action=" {{route("crud.create")}} " method="post">
+                        <form action=" {{route("usuarioCrud.create")}} " method="post">
                           @csrf
                           <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Login</label>
@@ -160,7 +160,7 @@
                 <td>
                   <div class="text-center">
                     <a href="" data-bs-toggle="modal" data-bs-target="#editarModal{{$item->id}}" class="btn btn-warning btn-sm"> <i class="fa-solid fa-pen-to-square"></i> </a>
-                    <a href=" {{ route("crud.delete",$item->id) }} " onclick="confirmation(event)" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash"></i> </a>
+                    <a href=" {{ route("usuarioCrud.delete",$item->id) }} " onclick="confirmation(event)" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash"></i> </a>
                   </div>
                     
                 </td>
@@ -178,7 +178,7 @@
                           </div>
                           {{-- Contenido del Modal Editar --}}
                               <div class="modal-body">
-                                <form action="{{ route('crud.update', ['id' => $item->id]) }}" method="POST">
+                                <form action="{{ route('usuarioCrud.update', ['id' => $item->id]) }}" method="POST">
                                   @csrf
                                   
                                   <input type="hidden" name="id" value="{{ $item->id }}">

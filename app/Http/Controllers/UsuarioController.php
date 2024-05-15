@@ -14,7 +14,6 @@ class UsuarioController extends Controller
         $usuarioData=Usuario::all();
         $rolData=Rol::all();
         return view("index-usuario")->with(['usuarioData' => $usuarioData, 'rolData' => $rolData]);
-
     } 
 
     public function create(Request $request){
@@ -61,17 +60,16 @@ class UsuarioController extends Controller
             return back()->with("incorrecto", "Error al editar usuario");
         }
 
-        
-
     }
 
     public function delete($id){
         try{
-            $sql = DB::delete("delete from usuario where id=$id");
+            $usuario = Usuario::findOrFail($id);
+            $usuario -> delete();
         }catch (\Throwable $th){
-            $sql = 0;
+            $usuario = 0;
         }
-        if ($sql == true){
+        if ($usuario == true){
             return back()->with("correcto","Usuario eliminado");
         }else{
             return back()->with("incorrecto","Usuario no se eliminó");
