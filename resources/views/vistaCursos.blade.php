@@ -19,22 +19,35 @@
           font-optical-sizing: auto;
           font-style: normal;
         }
-
-        
-
     
       </style>
 
     @include('menu');
 
     <main>
-    <h1 class="text-center p-3" style="font-weight: bold;">Mis cursos</h1>
+    <h1 class="text-center p-3" style="font-weight: bold;">Varios Cursos</h1>
     </main>
 
     <div style="display:flex; padding: 0 15%;">
       @foreach ($cursoData as $item)
           <div class="card" style="width: 18rem; margin:10px;">
-              <img class="card-img-top" src="images/comp.png" alt="Card image cap">
+              @if (strpos($item->imagen_ref, 'youtube.com') !== false || strpos($item->imagen_ref, 'youtu.be') !== false)
+                  @php
+                      // Extraer el ID del video de YouTube del enlace proporcionado
+                      $videoId = substr(parse_url($item->imagen_ref, PHP_URL_QUERY), 2); // Extraer solo el ID del video
+  
+                      // Construir la URL de la miniatura del video de alta calidad
+                      $thumbnailUrl = "https://img.youtube.com/vi/{$videoId}/maxresdefault.jpg";
+  
+                      // Si no hay miniatura de alta calidad, usar la predeterminada
+                      if (!get_headers($thumbnailUrl)) {
+                          $thumbnailUrl = "https://img.youtube.com/vi/{$videoId}/default.jpg";
+                      }
+                  @endphp
+                  <img class="card-img-top" src="{{ $thumbnailUrl }}" alt="Card image cap">
+              @else
+                  <img class="card-img-top" src="{{ $item->imagen_ref }}" alt="Card image cap">
+              @endif
               <div class="card-body">
                   <h5 class="card-title" style="font-weight: 700;"> {{$item->titulo}} </h5>
                   <p class="card-text" style="color:blue;">{{$item->anio_publicacion}}</p>
@@ -45,6 +58,8 @@
           </div>
       @endforeach
   </div>
+  
+  
   
   <div class="pagination justify-content-center">
     <ul class="pagination">
