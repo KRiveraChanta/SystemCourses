@@ -26,19 +26,29 @@ class CursoController extends Controller
         'categoriaData' => $categoriaData ]);
    }
 
-   public function vistaCursos(){
-
-    $cursoData = Curso::paginate(10);
-    $profesorData=Profesor::all();
-    $plataformaData=Plataforma::all();
-    $avanceData=Avance::all();
-    $categoriaData=Categoria::all();
-
-    return view("vistaCursos")->with(['cursoData' => $cursoData, 
-        'profesorData' => $profesorData,
-        'plataformaData' => $plataformaData,
-        'avanceData' => $avanceData,
-        'categoriaData' => $categoriaData ]);
+   public function vistaCursos(Request $request)
+   {
+       $buscadorNombreCurso = trim($request->get('buscadorNombreCurso'));
+       
+       // Utiliza el modelo Eloquent Curso para obtener los datos de los cursos
+       $cursoData = Curso::where('titulo', 'LIKE', '%' . $buscadorNombreCurso . '%')
+           ->orderBy('titulo', 'asc')
+           ->paginate(15);
+       
+       // Obtén otros datos necesarios
+       $profesorData = Profesor::all();
+       $plataformaData = Plataforma::all();
+       $avanceData = Avance::all();
+       $categoriaData = Categoria::all();
+   
+       return view("vistaCursos")->with([
+           'cursoData' => $cursoData,
+           'buscadorNombreCurso' => $buscadorNombreCurso,
+           'profesorData' => $profesorData,
+           'plataformaData' => $plataformaData,
+           'avanceData' => $avanceData,
+           'categoriaData' => $categoriaData
+       ]);
    }
 
    public function store(Request $request){

@@ -235,7 +235,7 @@
                                     <input type="text" class="form-control" id="txtImagen_ref" name="txtImagen_ref" value="{{ $item->imagen_ref }}">
 
                                     <label for="exampleInputEmail1" class="form-label">Profesor</label>
-                                    <select name="Id_profe" id="Id_profe" class="form-control">
+                                    <select name="Id_profe" id="Id_profe" class="form-control" >
                                       @foreach($profesorData as $profesor)
                                         @if($profesor->id==$item->id_profe)
                                           <option value="{{ $profesor->id }}" selected>{{ $profesor->nombre_profesor }}</option>
@@ -249,7 +249,7 @@
                                     <select name="Id_plataforma" id="Id_plataforma" class="form-control">
                                       @foreach($plataformaData as $plataforma)
                                         @if($plataforma->id==$item->id_plataforma)
-                                          <option value="{{ $plataforma->id }}" >{{ $plataforma->nombre_plataforma }}</option>
+                                          <option value="{{ $plataforma->id }}" selected>{{ $plataforma->nombre_plataforma }}</option>
                                         @else
                                         <option value="{{ $plataforma->id }}" >{{ $plataforma->nombre_plataforma }}</option>
                                         @endif
@@ -260,7 +260,7 @@
                                     <select name="Id_avance" id="Id_avance" class="form-control">
                                       @foreach($avanceData as $avance)
                                         @if($avance->id==$item->id_nivel)
-                                          <option value="{{ $avance->id }}" >{{ $avance->avance }}</option>
+                                          <option value="{{ $avance->id }}" selected>{{ $avance->avance }}</option>
                                         @else
                                         <option value="{{ $avance->id }}" >{{ $avance->avance }}</option>
                                         @endif
@@ -271,7 +271,7 @@
                                     <select name="Id_categoria" id="Id_categoria" class="form-control">
                                       @foreach($categoriaData as $categoria)
                                         @if($categoria->id==$item->id_categoria)
-                                          <option value="{{ $categoria->id }}" >{{ $categoria->nombre_categoria }}</option>
+                                          <option value="{{ $categoria->id }}" selected>{{ $categoria->nombre_categoria }}</option>
                                         @else
                                         <option value="{{ $categoria->id }}" >{{ $categoria->nombre_categoria }}</option>
                                         @endif
