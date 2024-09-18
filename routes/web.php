@@ -149,3 +149,6 @@ Route::get("/eliminar-curso/{id}",[CursoController::class,"delete"])->name("curs
 
 // Listar
 Route::get("/vista-cursos",[CursoController::class,"vistaCursos"])->name("cursoCrud.vistaCursos");
+
+// Listar Categria
+Route::get("/vista-cursos-por-categoria",[CursoController::class,"vistaCursosCategoria"])->name("cursoCrud.vistaCursosCategoria");

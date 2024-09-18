@@ -39,7 +39,6 @@
             .btn{
                 background: #efae78;
             }
-    
         
         </style>
     
@@ -53,7 +52,7 @@
         </main>
 
         <section style="padding: 5%;">
-            <div>
+            <div style="padding: 0 0 4% 0">
                 <form action="">
                     <div class="form-row" style="display: flex; gap:10px; justify-content:end;">
                         <div class="col-sm-3">

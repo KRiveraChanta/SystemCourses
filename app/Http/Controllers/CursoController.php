@@ -13,6 +13,30 @@ use App\Models\Categoria;
 
 class CursoController extends Controller
 {
+   public function index(Request $request){
+    $buscadorNombreCurso = trim($request->get('buscadorNombreCurso'));
+    // Utiliza el modelo Eloquent Curso para obtener los datos de los cursos
+    $cursoData = Curso::where('titulo', 'LIKE', '%' . $buscadorNombreCurso . '%')
+        ->orderBy('id', 'asc')
+        ->paginate(20);
+    
+    // Obtén otros datos necesarios
+    $profesorData = Profesor::all();
+    $plataformaData = Plataforma::all();
+    $avanceData = Avance::all();
+    $categoriaData = Categoria::all();
+
+    return view("index-curso")->with([
+        'cursoData' => $cursoData,
+        'buscadorNombreCurso' => $buscadorNombreCurso,
+        'profesorData' => $profesorData,
+        'plataformaData' => $plataformaData,
+        'avanceData' => $avanceData,
+        'categoriaData' => $categoriaData
+    ]);
+   }
+
+   /* 
    public function index(){
     $cursoData=Curso::all();
     $profesorData=Profesor::all();
@@ -25,15 +49,39 @@ class CursoController extends Controller
         'avanceData' => $avanceData,
         'categoriaData' => $categoriaData ]);
    }
+   */
 
    public function vistaCursos(Request $request)
    {
        $buscadorNombreCurso = trim($request->get('buscadorNombreCurso'));
-       
        // Utiliza el modelo Eloquent Curso para obtener los datos de los cursos
        $cursoData = Curso::where('titulo', 'LIKE', '%' . $buscadorNombreCurso . '%')
            ->orderBy('titulo', 'asc')
-           ->paginate(15);
+           ->paginate(12);
+       
+       // Obtén otros datos necesarios
+       $profesorData = Profesor::all();
+       $plataformaData = Plataforma::all();
+       $avanceData = Avance::all();
+       $categoriaData = Categoria::all();
+   
+       return view("vistaCursos")->with([
+           'cursoData' => $cursoData,
+           'buscadorNombreCurso' => $buscadorNombreCurso,
+           'profesorData' => $profesorData,
+           'plataformaData' => $plataformaData,
+           'avanceData' => $avanceData,
+           'categoriaData' => $categoriaData
+       ]);
+   }
+
+   public function vistaCursosCategoria(Request $request)
+   {
+       $buscadorNombreCurso = trim($request->get('buscadorNombreCurso'));
+       // Utiliza el modelo Eloquent Curso para obtener los datos de los cursos
+       $cursoData = Curso::where('titulo', 'LIKE', '%' . $buscadorNombreCurso . '%')
+           ->orderBy('titulo', 'asc')
+           ->paginate(12);
        
        // Obtén otros datos necesarios
        $profesorData = Profesor::all();

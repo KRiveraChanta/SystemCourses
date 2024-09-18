@@ -17,8 +17,20 @@
       font-family: "Montserrat", sans-serif;
       font-optical-sizing: auto;
       font-style: normal;
-
     }
+
+    .tabla-cursos{
+      padding: 0 5%;
+    }
+
+
+    .table-bordered>:not(caption)>*>*{
+      white-space: wrap; /* Evita que el texto se divida en varias líneas */
+      overflow: hidden; /* Oculta el texto que se desborda del contenedor */
+      text-overflow: ellipsis; 
+      max-width:15px;
+    }
+
   </style>
 
 <body>
@@ -26,9 +38,7 @@
   @include('menu');
 
     <h1 class="text-center p-3" style="font-weight: bold;">Cursos</h1>
-
-
-    <div style="padding: 0px 15%;" class="table-responsive">
+    <div class="table-responsive tabla-cursos">
         <div style="padding: 20px 20px 20px 1px;">
           <button data-bs-toggle="modal" data-bs-target="#crearModal" class="btn btn-primary">Nuevo</button>
         </div>
@@ -96,7 +106,7 @@
                           </div>
 
                           <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Año de publiccacion del curso</label>
+                            <label for="exampleInputEmail1" class="form-label">Año de publicacion del curso</label>
                             <input type="text" class="form-control" id="txtAño_publicacion" aria-describedby="emailHelp" name="txtAño_publicacion">
                             
                           </div>
@@ -164,9 +174,22 @@
 
             
           </div>
+          
+          <div style="padding: 0 0 4% 0">
+              <form action="">
+                  <div class="form-row" style="display: flex; gap:10px; justify-content:end;">
+                      <div class="col-sm-3">
+                          <input type="text" class="form-control" name="buscadorNombreCurso" value="{{ $buscadorNombreCurso }}" placeholder="Nombre del curso">
+                      </div>
+                      <div class="col-auto">
+                          <input type="submit" class="btn btn-warning" value="Buscar">
+                      </div>
+                  </div>
+              </form>
+          
+          </div>
 
-
-        <table class="table table-striped table-bordered table-hover border-secondary">
+        <table class="table table-bordered table-hover border-secondary">
             <thead class="table-dark">
               <tr>
                 <th scope="col">ID</th>
@@ -183,18 +206,23 @@
             </thead>
 
             <tbody>
+              @if(count($cursoData)<=0)
+              <div style="padding:250px 0">
+                  <h2 style="font-weight: 500;">No hay resultados :(</h2>
+              </div>
+              @else
               @foreach ($cursoData as $item)
               <tr>
-                <th>{{$item->id}}</th>
-                <td>{{$item->titulo}}</td>
-                <td>{{$item->url}}</td>
-                <td>{{$item->anio_publicacion}}</td>
-                <td>{{$item->imagen_ref}}</td>
-                <td>{{$item->selectProfesor->nombre_profesor}}</td>
-                <td>{{$item->selectPlataforma->nombre_plataforma}}</td>
-                <td>{{$item->selectAvance->avance}}</td>
-                <td>{{$item->selectCategoria->nombre_categoria}}</td>
-                <td>
+                <th  >{{$item->id}}</th>
+                <td  >{{$item->titulo}}</td>
+                <td > <span class="col__links"> {{$item->url}} </span> </td>
+                <td  >{{$item->anio_publicacion}}</td>
+                <td  >{{$item->imagen_ref}}</td>
+                <td  >{{$item->selectProfesor->nombre_profesor}}</td>
+                <td  >{{$item->selectPlataforma->nombre_plataforma}}</td>
+                <td  >{{$item->selectAvance->avance}}</td>
+                <td  >{{$item->selectCategoria->nombre_categoria}}</td>
+                <td  >
                   <div class="text-center " style="display:flex; gap: 2px;">
                     <a href="" data-bs-toggle="modal" data-bs-target="#editarModal{{$item->id}}" style="margin-right: 2px;" class="btn btn-warning btn-sm"> <i class="fa-solid fa-pen-to-square"></i> </a>
                     <a href=" {{ route("cursoCrud.delete",$item->id) }} " onclick="confirmation(event)" style="margin-right: 2px;" class="btn btn-danger btn-sm"> <i class="fa-solid fa-trash"></i> </a>
@@ -302,10 +330,40 @@
 
               </tr> 
               @endforeach
-
+              @endif
             </tbody>
           </table>
             
+    </div>
+
+    <div class="pagination justify-content-center">
+      <ul class="pagination">
+          @if ($cursoData->onFirstPage())
+              <li class="page-item disabled">
+                  <span class="page-link">&laquo; Anterior</span>
+              </li>
+          @else
+              <li class="page-item">
+                  <a class="page-link" href="{{ $cursoData->previousPageUrl() }}" rel="prev">&laquo; Anterior</a>
+              </li>
+          @endif
+
+          @for ($page = 1; $page <= $cursoData->lastPage(); $page++)
+              <li class="page-item {{ $page == $cursoData->currentPage() ? 'active' : '' }}">
+                  <a class="page-link" href="{{ $cursoData->url($page) }}">{{ $page }}</a>
+              </li>
+          @endfor
+
+          @if ($cursoData->hasMorePages())
+              <li class="page-item">
+                  <a class="page-link" href="{{ $cursoData->nextPageUrl() }}" rel="next">Siguiente &raquo;</a>
+              </li>
+          @else
+              <li class="page-item disabled">
+                  <span class="page-link">Siguiente &raquo;</span>
+              </li>
+          @endif
+      </ul>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
